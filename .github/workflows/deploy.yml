@@ -5,6 +5,7 @@ on:
     branches:
       - front-end
       - master
+      - main
 
 jobs:
   build:
