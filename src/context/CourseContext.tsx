@@ -5,7 +5,7 @@ import { Course } from "../types/types";
 
 type CourseContextType = ReducerState & {
   courseSetters?: {
-    editCourse: (course: Course) => void;
+    editCourse: (course: Partial<Course>) => void;
     addCourse: (course: Course) => void;
     deleteCourse: (course: Course) => void;
     setCurrentCourse: (course: Course) => void;
@@ -20,7 +20,7 @@ type ReducerAction = {
     | "deleteCourse"
     | "setCurrentCourse"
     | "setCourses";
-  payload: Course[] | Course;
+  payload: Course[] | Course | Partial<Course>;
 };
 
 type ReducerState = {
@@ -39,7 +39,7 @@ function reducerFunction(state: ReducerState, action: ReducerAction) {
   if (action.type === "editCourse") {
     const courses = state.courses.map((course) => {
       if (course.id === (action.payload as Course).id) {
-        return action.payload as Course;
+        return { course, ...(action.payload as Partial<Course>) } as Course;
       }
       return course;
     });
@@ -76,7 +76,7 @@ export default function CourseProvider({
     dispatch({ type: "setCourses", payload: courses });
   }
 
-  function editCourse(course: Course) {
+  function editCourse(course: Partial<Course>) {
     dispatch({ type: "editCourse", payload: course });
   }
 

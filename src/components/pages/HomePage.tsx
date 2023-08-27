@@ -6,6 +6,7 @@ import { Course, backendSuccessResponse } from "../../types/types";
 import SearchBar from "../reusable/searchBar/SearchBar.tsx";
 import CourseList from "../reusable/course/CourseList";
 import { CourseContext } from "../../context/CourseContext";
+import DeleteModal from "../reusable/modal/DeleteModal.tsx";
 
 export default function HomePage() {
   const { courseSetters, courses } = useContext(CourseContext);
