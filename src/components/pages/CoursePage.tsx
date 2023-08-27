@@ -1,16 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { fetchDataFromAPI } from "../../utils";
 import { Course, backendSuccessResponse } from "../../types/types";
 import CommentList from "../reusable/comment/CommentList";
 import AddComment from "../reusable/comment/AddComment";
-import { useState } from "react";
 import ReviewStarsContextProvider from "../../context/ReviewStarsContext";
+import { useContext, useEffect } from "react";
+import { CourseContext } from "../../context/CourseContext";
 
 export default function CoursePage() {
+  const { currentCourse: course, courseSetters } = useContext(CourseContext);
+
   const { response: _course } =
     useLoaderData() as unknown as backendSuccessResponse<Course>;
+  useEffect(() => {
+    if (_course?.id) {
+      console.log("ana badkhol hena");
+      courseSetters?.setCurrentCourse(_course);
+    }
+  }, [_course]);
 
-  const [course, setCourse] = useState(_course);
+  console.log({ _course, course });
 
   return (
     <main className="px-16">
@@ -24,27 +35,32 @@ export default function CoursePage() {
           alt={course.title}
         />
       </div>
-      <h1 className="text-[40px] font-bold text-gray-700">{course.title}</h1>
-      <p className="text-md text-gray-600 mb-2">🙎🏻‍♂️ {course.instructorName}</p>
-      <p className="text-md text-gray-500 mb-3">{course.description}</p>
+      <h1 className="text-[40px] font-bold text-gray-700">{course?.title}</h1>
+      <p className="text-md text-gray-600 mb-2">🙎🏻‍♂️ {course?.instructorName}</p>
+      <p className="text-md text-gray-500 mb-3">{course?.description}</p>
       <div className="flex gap-4 mb-4">
         <div className="flex items-center gap-1">
           <span>⭐️</span>
           <span
-            title={`ratings ${course.rating.toFixed(1)}`}
+            title={`ratings ${course.rating?.toFixed(1)}`}
             className="text-lg text-gray-500"
           >
-            {course.rating.toFixed(1)}
+            {course.rating?.toFixed(1)}
           </span>
         </div>
         <div className="rounded-lg text-md bg-white flex items-center gap-[2px]">
           <span>🕐</span>
-          <span className=" text-gray-500">{course.duration}h</span>
+          <span className=" text-gray-500">{course?.duration}h</span>
         </div>
       </div>
-      <CommentList comments={course.comments}></CommentList>
+      <CommentList comments={course?.comments}></CommentList>
       <ReviewStarsContextProvider>
-        <AddComment course={course} setCourse={setCourse} />
+        <AddComment
+          course={course}
+          setCourse={
+            courseSetters?.setCurrentCourse as (course: Course) => void
+          }
+        />
       </ReviewStarsContextProvider>
     </main>
   );
