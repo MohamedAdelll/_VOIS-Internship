@@ -3,7 +3,7 @@
 import { useContext, useEffect } from "react";
 import useFetch from "../../custom-hooks/useFetch";
 import { Course, backendSuccessResponse } from "../../types/types";
-import SearchBar from "../reusable/searchBar/SearchBar";
+import SearchBar from "../reusable/searchBar/SearchBar.tsx";
 import CourseList from "../reusable/course/CourseList";
 import { CourseContext } from "../../context/CourseContext";
 
