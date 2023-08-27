@@ -18,7 +18,7 @@ export default function CsvDropzone() {
         endpoint: "course/bulkInsertCSV",
         configurationOpt: { method: "POST", body: formData },
       });
-      console.log(response);
+      console.log(response, "hi");
     }
   }
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
