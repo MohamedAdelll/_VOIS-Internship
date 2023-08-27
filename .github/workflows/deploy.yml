@@ -17,23 +17,21 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
-      - name: Debugging
-        run: |
-          pwd # Print current working directory
-          ls -R # List contents of all directories recursively
-
-      - name: Install dependencies
+        
+        - name: Install dependencies
         uses: bahmutov/npm-install@v1
-
-      - name: Build css
+        
+        - name: Build css
         run:  npx tailwindcss -i "${GITHUB_WORKSPACE}/src/App.css" -o "${GITHUB_WORKSPACE}/dist/output.css"
-
-      - name: Build project
+        
+        - name: Build project
         run: npm run build
-
-      - name: Copy Tailwind CSS output
-        run: cp dist/output.css dist/assets/output.css
-
+        
+        - name: Debugging
+          run: |
+            pwd # Print current working directory
+            ls -R # List contents of all directories recursively
+            
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
