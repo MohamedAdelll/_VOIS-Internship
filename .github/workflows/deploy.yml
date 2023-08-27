@@ -17,11 +17,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
+      - name: Debugging
+        run: |
+          pwd # Print current working directory
+          ls -R # List contents of all directories recursively
+
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Build css
-        run: npm run build:css
+        run:  npx tailwindcss -i "${GITHUB_WORKSPACE}/src/app.css" -o "${GITHUB_WORKSPACE}/dist/output.css"
 
       - name: Build project
         run: npm run build
