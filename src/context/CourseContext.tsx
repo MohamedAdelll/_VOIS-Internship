@@ -37,6 +37,7 @@ export const CourseContext = createContext<CourseContextType>(initialState);
 
 function reducerFunction(state: ReducerState, action: ReducerAction) {
   if (action.type === "editCourse") {
+    console.log("inside Reducer", action.payload);
     const courses = state.courses.map((course) => {
       if (course.id === (action.payload as Course).id) {
         return { course, ...(action.payload as Partial<Course>) } as Course;

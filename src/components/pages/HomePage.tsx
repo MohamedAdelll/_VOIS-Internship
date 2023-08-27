@@ -1,19 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import useFetch from "../../custom-hooks/useFetch";
 import { Course, backendSuccessResponse } from "../../types/types";
 import SearchBar from "../reusable/searchBar/SearchBar.tsx";
 import CourseList from "../reusable/course/CourseList";
 import { CourseContext } from "../../context/CourseContext";
-import DeleteModal from "../reusable/modal/DeleteModal.tsx";
+import { Button } from "reactstrap";
+import AddModal from "../reusable/modal/AddModal.tsx";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { courseSetters, courses } = useContext(CourseContext);
+  const [showAddModal, setShowAddModal] = useState(false);
   const data = useFetch<backendSuccessResponse<Course[]>>({
     endpoint: "course/getAllCourses",
   });
   useEffect(() => {
+    console.log(data);
     if (data.state === "complete" && Array.isArray(data.response?.response)) {
       courseSetters?.setCourses(data.response?.response as Course[]);
     }
@@ -34,12 +38,18 @@ export default function HomePage() {
       </div>
     );
   }
-  console.log({ courses });
 
   return (
-    <main className="flex flex-col mb-10 sm:flex-row">
+    <main className="relative flex flex-col py-10 sm:flex-row">
+      <div className="absolute flex gap-2 top-[-4px] left-4">
+        <Link to="bulkInsert">
+          <Button color="primary">Bulk Insert</Button>
+        </Link>
+        <Button onClick={() => setShowAddModal(true)}>Add Course ➕</Button>
+      </div>
       <SearchBar />
       {result || <CourseList courses={courses}></CourseList>}
+      <AddModal show={showAddModal} setShow={setShowAddModal}></AddModal>
     </main>
   );
 }
