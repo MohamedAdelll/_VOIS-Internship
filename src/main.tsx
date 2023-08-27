@@ -13,15 +13,15 @@ import CoursePage, {
 
 const router = createBrowserRouter([
   {
-    path: "/_VOIS-Internship",
+    path: "_VOIS-Internship",
     element: <Root></Root>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <HomePage></HomePage>,
       },
       {
-        path: "/course/:courseId",
+        path: "_VOIS-Internship/course/:courseId",
         element: <CoursePage></CoursePage>,
         loader: courseLoader,
       },
