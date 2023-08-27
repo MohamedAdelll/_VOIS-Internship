@@ -26,7 +26,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build css
-        run:  npx tailwindcss -i "${GITHUB_WORKSPACE}/src/app.css" -o "${GITHUB_WORKSPACE}/dist/output.css"
+        run:  npx tailwindcss -i "${GITHUB_WORKSPACE}/src/App.css" -o "${GITHUB_WORKSPACE}/dist/output.css"
 
       - name: Build project
         run: npm run build
