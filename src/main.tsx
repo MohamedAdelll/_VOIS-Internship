@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <HomePage></HomePage>,
       },
       {
-        path: "_VOIS-Internship/course/:courseId",
+        path: "course/:courseId",
         element: <CoursePage></CoursePage>,
         loader: courseLoader,
       },
