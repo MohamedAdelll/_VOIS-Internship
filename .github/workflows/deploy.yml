@@ -20,8 +20,14 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
+      - name: Build css
+        run: npm run build:css
+
       - name: Build project
         run: npm run build
+
+      - name: Copy Tailwind CSS output
+        run: cp dist/output.css dist/assets/output.css
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
