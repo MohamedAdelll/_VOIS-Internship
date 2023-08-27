@@ -14,11 +14,10 @@ export default function CsvDropzone() {
       const [file] = acceptedFiles;
       const formData = new FormData();
       formData.append("file", file);
-      const response = await fetchDataFromAPI({
+      await fetchDataFromAPI({
         endpoint: "course/bulkInsertCSV",
         configurationOpt: { method: "POST", body: formData },
       });
-      console.log(response, "hi");
     }
   }
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
