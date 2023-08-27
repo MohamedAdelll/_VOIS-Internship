@@ -25,7 +25,7 @@ export default function CoursePage() {
 
   return (
     <main className="px-16">
-      <div className="flex justify-center bg-slate-600/30 p-8 rounded-lg w-[70%] mb-8 mx-auto">
+      <div className="flex justify-center  bg-slate-600/30 p-8 rounded-lg w-[70%] mb-8 mx-auto">
         <img
           className="w-full max-w-[960px] h-auto rounded-md"
           src={
