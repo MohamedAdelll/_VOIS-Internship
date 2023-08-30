@@ -14,7 +14,7 @@ import BulkInsert from "./components/pages/BulkInsert.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "_VOIS-Internship",
+    path: "/",
     element: <Root></Root>,
     children: [
       {
@@ -29,7 +29,6 @@ const router = createBrowserRouter([
       {
         path: "bulkInsert",
         element: <BulkInsert></BulkInsert>,
-        loader: courseLoader,
       },
     ],
   },

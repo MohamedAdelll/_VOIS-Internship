@@ -6,7 +6,6 @@ import { fetchDataFromAPI } from "../../utils";
 export default function CsvDropzone() {
   const [error, setError] = useState("");
   async function onDropHandler(acceptedFiles: File[]) {
-    console.log(acceptedFiles);
     if (acceptedFiles.some((file) => !file.name.endsWith("csv"))) {
       setError("Only CSV files are allowed");
       return;

@@ -28,14 +28,11 @@ export default function EditModal({
     setShow(false);
   }
 
-  console.log(currentCourse);
-
   async function editCourseHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    console.log(data);
     const response = await fetchDataFromAPI({
       endpoint: `course/updateCourse/${currentCourse.id}`,
       configurationOpt: {
